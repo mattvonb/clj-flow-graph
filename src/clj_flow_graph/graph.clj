@@ -1,4 +1,4 @@
-(ns clj-graph.graph)
+(ns clj-flow-graph.graph)
 
 (defrecord Edge [source sink])
 
@@ -15,7 +15,7 @@
 ;; +edges+ maps a node to the set of all edges for which it is the source
 ;; +capacities+ maps an edge to its integer capacity
 ;; +flows+ maps an edge to the integer flow of that edge
-(defrecord Graph [edges capacities flows])
+(defrecord FlowGraph [edges capacities flows])
 
 ;; all the edges with the given source
 (defn edges [graph source]
@@ -43,12 +43,12 @@
 
 ;; Constructor function.
 ;; args are [source sink capacity] triples that define edges.
-(defn graph
+(defn flow-graph
   ([]
-   (Graph. {} {} {}))
+   (FlowGraph. {} {} {}))
   ([& edges]
    (reduce (fn [g edge] (apply (partial add-edge g) edge))
-           (graph)
+           (flow-graph)
            edges)))
 
 ;; the flow over edge +edge+

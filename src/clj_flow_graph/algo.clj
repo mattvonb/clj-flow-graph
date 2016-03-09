@@ -1,5 +1,5 @@
-(ns clj-graph.algo
-  (:require [clj-graph.graph :as g]))
+(ns clj-flow-graph.algo
+  (:require [clj-flow-graph.graph :as g]))
 
 ;; +prev+ is a map of a node to an edge for which that node is its sink.
 ;; +sink+ is a node
