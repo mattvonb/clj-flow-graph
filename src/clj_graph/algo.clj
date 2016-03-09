@@ -11,7 +11,7 @@
          e (get prev sink)]
     (if (nil? e)
       path
-      (recur (:source e) (conj path e) (get prev sink)))))
+      (recur (:source e) (conj path e) (get prev (:source e))))))
 
 ;; A breadth-first search from +source+ to +sink+ whereby each edge traversed
 ;; must have a non-zero residual capacity.
@@ -23,23 +23,21 @@
          q (conj clojure.lang.PersistentQueue/EMPTY source)]
     (let [cur (peek q)
           q (pop q)
-
           ;; successors must have non-zero residual capacity
           ;; and be not yet visited
           nexts (filter #(and (> (g/residual-capacity graph %) 0)
-                              (not (contains? visited %)))
+                              (not (contains? visited (:sink %))))
                         (g/edges graph cur))
-          
-          prev (into prev (map #(assoc {} (:sink %) %) nexts))]
-
+          prev (into prev (map #(assoc {} (:sink %) %) nexts))
+          visited (into visited (map #(:sink %) nexts))
+          q (into q (map #(:sink %) nexts))]
       ;; we're done if we found our destination, +sink+ or have explored the
       ;; entire graph
       (cond
         (contains? prev sink) (to-path prev sink)
         (empty? q) nil
-        :else (recur prev
-                     (into visited (map #(:sink %) nexts))
-                     (into q (map #(:sink %) nexts)))))))
+        :else (recur prev visited q)))))
+
           
 
 ;; Returns a path from +source+ to +sink+ that has a non-zero flow capacity
