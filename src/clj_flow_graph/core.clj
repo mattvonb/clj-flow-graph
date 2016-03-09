@@ -1,4 +1,4 @@
-(ns clj-flow-graph.graph)
+(ns clj-flow-graph.core)
 
 (defrecord Edge [source sink])
 

@@ -1,6 +1,6 @@
 (ns clj-flow-graph.core-test
   (:require [clojure.test :refer :all]
-            [clj-flow-graph.graph :as g]
+            [clj-flow-graph.core :as g]
             [clj-flow-graph.algo :refer :all]))
 
 (deftest max-flow-single-edge
