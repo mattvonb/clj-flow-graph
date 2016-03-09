@@ -21,16 +21,16 @@
   (loop [prev {source nil}
          visited #{source}
          q (conj clojure.lang.PersistentQueue/EMPTY source)]
-    (let [cur (peek q)
-          q (pop q)
+    (let [cur     (peek q)
+          q       (pop q)
           ;; successors must have non-zero residual capacity
           ;; and be not yet visited
-          nexts (filter #(and (> (g/residual-capacity graph %) 0)
-                              (not (contains? visited (:sink %))))
-                        (g/edges graph cur))
-          prev (into prev (map #(assoc {} (:sink %) %) nexts))
+          nexts   (filter #(and (> (g/residual-capacity graph %) 0)
+                                (not (contains? visited (:sink %))))
+                          (g/edges graph cur))
+          prev    (into prev (map #(assoc {} (:sink %) %) nexts))
           visited (into visited (map #(:sink %) nexts))
-          q (into q (map #(:sink %) nexts))]
+          q       (into q (map #(:sink %) nexts))]
       ;; we're done if we found our destination, +sink+ or have explored the
       ;; entire graph
       (cond
