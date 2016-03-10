@@ -1,6 +1,6 @@
 Provides an implementation of a directed graph with weighted edges via the clj-flow-graph.core namespace.
 
-A method for computing the maximum flow from a given source to a given sink in a given graph is provided by the clj-flow-graph.core namespace.
+A method for computing the maximum flow from a given source to a given sink in a given graph is provided by the clj-flow-graph.algo namespace.
 
 E.g.:
 
