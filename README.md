@@ -3,6 +3,7 @@ The clj-flow-graph.core namespace provides an implementation of a directed graph
 The clj-flow-graph.algo namespace provides an implementation of an algorithm for finding the max flow of a graph.
 
 E.g.:
+
     (require '[clj-flow-graph.core :as g]
              '[clj-flow-graph.algo :as algo])
     
